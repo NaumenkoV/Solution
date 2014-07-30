@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <context:component-scan base-package="com.softserveinc.ita.controller"/>
+    <context:component-scan base-package="com.softserveinc.ita.handlers"/>
+    <context:component-scan base-package="com.softserveinc.ita.service.impl"/>
+    <mvc:annotation-driven/>
+
+    <mvc:resources location="/WEB-INF/common/" mapping="/common/**"/>
+    <mvc:resources location="/WEB-INF/login/" mapping="/login/**"/>
+    <mvc:resources location="/WEB-INF/errors/" mapping="/errors/**"/>
+    <mvc:resources location="/WEB-INF/interview/" mapping="/ui/interview/**"/>
+    <mvc:resources location="/WEB-INF/applicants/" mapping="/ui/group/**"/>
+    <mvc:resources location="/WEB-INF/groups/" mapping="/ui/groups/**"/>
+    <mvc:resources location="/WEB-INF/user/" mapping="/ui/user/**"/>
+    <mvc:resources location="/WEB-INF/questions/" mapping="/ui/questions/**"/>
+    <mvc:resources location="/WEB-INF/main/" mapping="/**"/>
+
+    <bean id = "viewResolverServiceImpl" class = "com.softserveinc.ita.service.impl.ViewResolverServiceImpl"/>
+
+    <bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl">
+        <constructor-arg name="baseUrl" value="http://localhost:8080"/>
+    </bean>
+
+    <!--Logging-->
+    <aop:aspectj-autoproxy/>
+    <bean id="logAspect" class="com.softserveinc.ita.logging.AopControllerLogging"/>
+    <!-- freemarker config -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/common/ftl/"/>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".ftl"/>
+        <property name="exposeSessionAttributes" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>

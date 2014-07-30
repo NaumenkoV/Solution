@@ -1,0 +1,264 @@
+/* right panel items */
+
+#panel-notifications {
+    overflow-y: auto;
+    width: 100%;
+    /*
+        minus panel-title.height
+    */
+    height: calc(70% - 25px);
+}
+#panel-chat {
+    border-top: solid 2px #ddd;
+    width: 100%;
+    height: 30%;
+}
+#send-msg-btn {
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+}
+
+#join-chat-btn {
+    width: 100%;
+    height: 15%;
+    border: 0;
+    cursor: pointer;
+}
+
+#message-content {
+    height: calc(100% - 45px);
+    width: 100%;
+}
+#message-content textarea {
+    padding: 10px;
+    overflow-y: auto;
+    border: 0;
+    resize: none;
+    height: 100%;
+    width: 100%;
+}
+
+/* twitter-like chat style */
+
+.dm-message {
+    max-width: 340px;
+    float: left;
+    position: relative;
+    padding: 7px 12px;
+    font-size: 12px;
+    word-wrap: break-word;
+    background-color: #f5f8fa;
+    border: 1px solid #e1e8ed;
+    border-radius: 4px;
+    box-shadow: inset 0 3px 3px rgba(255, 255, 255, .4), 0 1px 1px rgba(0, 0, 0, .05);
+    margin-left: 60px;
+    margin-right: 0px;
+    min-height: 70px;
+}
+
+.dm-nickname{
+    font-size: 11px;
+    font-weight: bold;
+    color: #585858;
+    margin-left: 50px;
+    margin-bottom: 5px;
+}
+
+.dm-online-text{
+    width: 18px;
+    color: green;
+    font-weight: bold;
+}
+
+.dm-offline-text{
+    width: 8px;
+    color: red;
+    font-weight: bold;
+}
+
+.sent .dm-message {
+    float: right;
+    background-color: #e6f2fa;
+    margin-left: 0px;
+    margin-right: 60px;
+}
+
+.sent .dm-nickname {
+    padding-left: 100px;
+}
+
+.dm-content .time {
+
+    display: block;
+    margin-right: 58px;
+    margin-bottom: 5px;
+    font-size: 11px;
+    line-height: 1;
+    color: #ccd6dd;
+    text-align: center;
+}
+
+
+.dm-content .server {
+    display: block;
+    margin-right: 58px;
+    margin-bottom: 5px;
+    font-size: 11px;
+    line-height: 1;
+    color: #ccd6dd;
+    text-align: center;
+}
+
+.dm .avatar {
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.dm-info-message{
+    color: dimgray;
+    font-size:10px;
+    font-weight: bold;
+    margin-left: 30%;
+}
+
+.sent .avatar {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: auto;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 5px;
+    -moz-force-broken-image-icon: 1;
+}
+.sent .dm-caret {
+    right: -10px;
+    left: auto;
+}
+
+
+.dm-caret {
+    position: absolute;
+    top: 12px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+}
+.sent .dm-caret-outer {
+    border-right: 0;
+    border-left: 5px solid #e1e8ed;
+}
+.dm-caret-outer {
+    top: 0;
+    left: 0;
+    z-index: 10;
+    border-top: 5px solid transparent;
+    border-right: 5px solid #e1e8ed;
+    border-bottom: 5px solid transparent;
+}
+.dm-caret-inner, .dm-caret-outer {
+    position: absolute;
+    width: 0;
+    height: 0;
+    vertical-align: text-bottom;
+}
+.sent .dm-caret-inner {
+    left: -1px;
+    border-right: 0;
+    border-left: 4px solid #e1e8ed;
+}
+.dm-caret-inner {
+    top: 1px;
+    left: 1px;
+    z-index: 11;
+    border-top: 4px solid transparent;
+    border-right: 4px solid #f5f8fa;
+    border-bottom: 4px solid transparent;
+}
+.dm {
+    margin-top: 15px;
+    position: relative;
+    overflow: auto;
+}
+.dm-chat{
+    padding: 10px;
+}
+
+.dm.ng-enter,
+.dm.ng-leave,
+.dm.ng-move {
+    position:relative;
+}
+
+.dm.ng-enter {
+    -webkit-animation: 0.5s repeat-animation-enter;
+    animation: 0.5s repeat-animation-enter;
+}
+
+.dm.ng-leave {
+    -webkit-animation: 0.5s repeat-animation-leave;
+    animation: 0.5s repeat-animation-leave;
+}
+
+.dm.ng-move {
+    -webkit-animation: 0.5s repeat-animation-move;
+    animation: 0.5s repeat-animation-move;
+}
+
+@keyframes repeat-animation-enter {
+    from {
+        left:-10px;
+        opacity:0;
+    }
+    to {
+        left:0;
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes repeat-animation-enter {
+    from {
+        left:-10px;
+        opacity:0;
+    }
+    to {
+        left:0;
+        opacity:1;
+    }
+}
+
+@keyframes repeat-animation-leave {
+    from {
+        left:0;
+        opacity:1;
+    }
+    to {
+        left:-10px;
+        opacity:0;
+    }
+}
+
+@-webkit-keyframes repeat-animation-leave {
+    from {
+        left:0;
+        opacity:1;
+    }
+    to {
+        left:-10px;
+        opacity:0;
+    }
+}
+
+@keyframes repeat-animation-move {
+    from { opacity:0.5; }
+    to { opacity:1; }
+}
+
+@-webkit-keyframes repeat-animation-move {
+    from { opacity:0.5; }
+    to { opacity:1; }
+}

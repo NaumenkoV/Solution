@@ -1,0 +1,160 @@
+{{#data.length}}
+{{#edit}}
+<hr>
+{{/edit}}
+{{#schedule}}
+<hr>
+{{/schedule}}
+{{/data.length}}
+{{#data}}
+<div class="container ">
+    <h3 class="accordion-section
+    {{#offering}}{{^applicant.employed}}top{{/applicant.employed}}{{/offering}}"
+        align="left">
+        <span align="left">
+            {{^newApp}}{{applicant.name}} {{applicant.surname}}{{/newApp}}
+            {{#newApp}}[New applicant]{{/newApp}}
+        </span>
+        {{#interview}}
+        <span class="points" align="right">{{interview.totalPoints}}</span>
+        {{/interview}}
+        {{#offering}}
+        {{^applicant.employed}}
+        <a class="employ">Make an offer</a>
+        {{/applicant.employed}}
+        {{#applicant.employed}}
+        <span class="employ">[Employed]</span>
+        {{/applicant.employed}}
+        {{/offering}}
+    </h3>
+
+    <div class="applicant" applicantid="{{applicant.id}}">
+        <div class="wrapper">
+            <div class="profile">
+                {{#applicant.photo}}
+                <div class="image">
+                    <img alt="Failed to load the photo ;(" width="150" height="200"
+                         src="{{applicant.photo}}"/>
+                </div>
+                {{/applicant.photo}}
+                <div class="info">
+                    <dl>
+                        <dt>Name:</dt>
+                        <dd><input class=" editable validatable" name="name" type="text"
+                            {{^newApp}}disabled{{/newApp}} value="{{applicant.name}}"
+                            pattern="^([A-ZА-Я][а-яa-z']+)([- ]?[А-ЯA-Z][а-яa-z']+)*$"/>
+                        </dd>
+                        <dt>Last name:</dt>
+                        <dd><input class=" editable validatable" name="surname" type="text"
+                            {{^newApp}}disabled{{/newApp}}
+                            value="{{applicant.surname}}" pattern="^([A-ZА-Я][а-яa-z']+)([- ]?[А-ЯA-Z][а-яa-z']+)*$"/>
+                        </dd>
+                        <dt>Phone:</dt>
+                        <dd><input class=" editable validatable" name="phone" type="text"
+                            {{^newApp}}disabled{{/newApp}}
+                            value="{{applicant.phone}}" pattern="\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})"/>
+                        </dd>
+                        <dt>E-mail:</dt>
+                        <dd><input class="editable validatable" name="email" type="text"
+                            {{^newApp}}disabled{{/newApp}}
+                            value="{{applicant.email}}"
+                            pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"/>
+                        </dd>
+                        <dt>Birthday:</dt>
+                        <dd><input class="birthday editable date" type="text"
+                            {{^newApp}}disabled{{/newApp}}
+                            before = "false"
+                            value="{{applicant.birthday}}"/>
+                        </dd>
+                        {{#newApp}}
+                        <dt>CV:</dt>
+                        <dd>
+                            <form enctype="multipart/form-data">
+                                <span class="file-wrapper">
+  <input type="file" class="cv validatable" accept=".doc,.docx,.odt,.pdf,application/msword,
+                               application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+  <span class="button">Choose a CV</span>
+</span></form>
+                        </dd>
+                        {{/newApp}}
+                    </dl>
+                    {{^newApp}}
+                    <a class="openCV" href="/repository/doc/{{applicant.id}}"
+                       target="_blank">Open CV</a>
+                    {{^rank}}
+                    {{^offering}}
+                    <button class="editApplicant editable">Edit</button>
+                    <button class="submit editable">Submit</button>
+                    {{/offering}}
+                    {{/rank}}
+                    {{/newApp}}
+                    {{#newApp}}
+                    <button class="add">Submit</button>
+                    {{/newApp}}
+                </div>
+            </div>
+            <div class="schedule" appointmentID="{{appointmentID}}">
+                {{^newApp}}
+                {{^rank}}
+                {{^offering}}
+                <dl>
+                    <dt>Date:</dt>
+                    <dd><input class="date {{^newApp}}schedulable{{/newApp}}" type="text"
+                               value="{{appointment.startDate}}" before="true" {{#edit}}disabled{{/edit}}/>
+                    </dd>
+                    <dt>Duration:</dt>
+                    <dd><input type="text"
+                               class="duration validatable {{^newApp}}schedulable{{/newApp}}"
+                               value="{{appointment.durationTime}}" pattern="^[1-9][0-9]*$"
+                        {{#edit}}disabled{{/edit}}/>
+                    </dd>
+                    <dt>Time:</dt>
+                    <dd><input type="time"
+                               class="validatable time {{^newApp}}schedulable{{/newApp}}"
+                               value="{{appointment.startTime}}"
+                               pattern="^([0-1][0-9]|2[0-4]):[0-5][0-9]$"
+                        {{#edit}}disabled{{/edit}}/>
+                    </dd>
+                </dl>
+                <select class="users {{^newApp}}schedulable{{/newApp}}">
+                    {{#appointment.availableUsers}}
+                    <option value="{{id}}"
+                    {{#disabled}}disabled{{/disabled}}>{{name}} {{surname}}</option>
+                    {{/appointment.availableUsers}}
+                </select>
+                <button class="addUser {{^newApp}}schedulable{{/newApp}}"
+                {{#edit}}disabled{{/edit}}
+                {{#schedule}}{{^appointment.availableUsers}}disabled{{/appointment.availableUsers}}{{/schedule}}
+                >Add expert
+                </button>
+                <select class="scheduled {{^newApp}}schedulable{{/newApp}}">
+                    {{#appointment.scheduledUsers}}
+                    <option value="{{id}}">{{name}} {{surname}}</option>
+                    {{/appointment.scheduledUsers}}
+                </select>
+                <button class="removeUser {{^newApp}}schedulable{{/newApp}}"
+                {{#edit}}disabled{{/edit}}
+                {{#schedule}}{{^appointment.scheduledUsers}}disabled{{/appointment.scheduledUsers}}{{/schedule}}
+                >Remove expert
+                </button>
+                <div>
+                    <button class="postAppointment {{#edit}}schedulable{{/edit}}"
+                    {{#edit}}disabled{{/edit}}>Schedule
+                    </button>
+                    {{#edit}}
+                    <button class="editAppointment">Edit</button>
+                    <button class="notify">Notify</button>
+                    <button class="interview" disabled>Begin interview</button>
+                    {{/edit}}
+                </div>
+                {{/offering}}
+                {{/rank}}
+                {{/newApp}}
+                {{#rank}}
+                {{interview.finalComment}}
+                {{/rank}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/data}}

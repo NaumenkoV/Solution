@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link rel="stylesheet" href="interview/css/finalCommentPopup.css">
+    </head>
+
+    <body>
+
+        <div id="final-comment-popup" class="row">
+            <header id="final-comment-title-popup"><span>final comment</span></header>
+
+            <div class="col-xs-12">
+                <textarea  ng-model="$parent.finalComment" id="text-area" class="form-control" placeholder="{{user.name}} {{user.surname}}, leave your comment... "></textarea>
+            </div>
+            <a id="submit-final-btn" class="panel-btn" ng-click="submitComment()" href="#">
+                <span class="glyphicon glyphicon-ok"></span> Save comment
+            </a>
+        </div>
+    </body>
+</html>

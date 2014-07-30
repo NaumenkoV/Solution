@@ -1,0 +1,151 @@
+/* main panels */
+
+#main-panel{
+    width: 75%;
+    height: calc(100% - 50px);
+    float: left;
+}
+#left-panel {
+    height: 100%;
+    width: 30%;
+    border-right: solid 2px #ddd;
+    float: left;
+}
+#right-panel {
+    width: 25%;
+    border-left: solid 2px #ddd;
+}
+#central-panel {
+    background-color: #fff;
+    width: 70%;
+    height: 100%;
+    position: relative;
+    float: right;
+}
+/*#left-panel,*/
+/*#central-panel,*/
+#right-panel{
+    height: calc(100% - 50px);
+    float: left;
+}
+
+
+/* header buttons */
+
+#finish-btn {
+    width: 50px;
+    font-size: 25pt;
+}
+#applicant-btn {
+    position: absolute;
+    left: 37%;
+    right: 37%;
+    font-size: 20pt;
+}
+#header-user-profile-btn {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#header-logo {
+    height: 100%;
+    width: 180px;
+    background: url(../img/ss-logo-title.png) no-repeat center center;
+}
+#page-title {
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: none;
+    text-transform: uppercase;
+    padding-left: 15px;
+    letter-spacing: 3px;
+}
+#header-left-group{} #header-right-group {
+    float: right;
+}
+/* left panel items */
+
+
+#questions-list {
+    width: 100%;
+    /*  minus new-question-btn.height
+        minus panel-title.height
+    */
+    overflow-y: auto;
+    height: calc(100% - 70px);
+}
+#new-question-btn {
+    width: 100%;
+}
+
+.list-group-item{
+    text-align: left;
+}
+.list-group-item.active{
+    background-color: #313131;
+    border-color: grey;
+    color: white;
+}
+.list-group-item.active:hover{
+    background-color: black;
+    border-color: grey;
+    color: grey;
+}
+.list-group-item.answered{
+    background-color: #f4f4f4;
+    border-color: #ddd;
+    color: #ccd6dd;
+}
+/* central panel items */
+
+#question-container {
+    height: 40%;
+    padding: 15px
+}
+#question-area{
+    background: none;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 26pt;
+}
+#question-area:hover{
+    border: 0;
+}
+#comment-container {
+    height: 40%;
+    padding: 15px
+}
+#comment-area{
+    background: none;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 18pt;
+}
+#comment-area:hover{
+    border: 0;
+}
+.rating-container {
+    height: 20%;
+    padding: 15px;
+    font-size: 18pt;
+}
+#submit-question-btn {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+/*
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+*/
+}
+#question-manager {
+    height: calc(100% - 70px);
+}

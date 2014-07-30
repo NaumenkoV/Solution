@@ -1,0 +1,12 @@
+<li data-id={{groupId}}>
+            <div class='easyBox'>
+            <a  class = 'deleteButton'> <img src='groups/images/delete.jpg' onclick = 'viewDeleteDialog("{{groupId}}");' alt=''></a>
+            <a  class = 'editButton'> <img src='groups/images/edit.jpg' onclick = 'viewEditInformationDialog("{{groupId}}")' alt=''></a>
+            <a href='{{ref}}'>
+            <img src='groups/images/{{image}}' alt=''></a>
+             <div class='inner'>
+            <h3 class='light'><a href='{{ref}}'>{{groupName}}</a></h3>
+            <p>{{courseName}}</p>
+            </div>
+            </div>
+            </li>

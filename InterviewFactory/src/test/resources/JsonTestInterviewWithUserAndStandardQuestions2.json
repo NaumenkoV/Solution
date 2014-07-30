@@ -1,0 +1,114 @@
+{
+    "InterviewId": "2",
+    "QuestionsBlocks": [
+        {
+            "Id": null,
+            "UserId": null,
+            "InterviewId": "2",
+            "Questions": [
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "How are you?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 1
+                },
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "What is your name?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 1
+                }
+            ],
+            "FinalComment": "",
+            "BonusPoints": 0
+        },
+        {
+            "Id": null,
+            "UserId": "1",
+            "InterviewId": "2",
+            "Questions": [
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with quality assurance engineering?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 2
+                },
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with database developing?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 3
+                }
+            ],
+            "FinalComment": "",
+            "BonusPoints": 0
+        },
+        {
+            "Id": null,
+            "UserId": "3",
+            "InterviewId": "2",
+            "Questions": [
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with quality assurance engineering?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 2
+                },
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with database developing?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 3
+                }
+            ],
+            "FinalComment": "",
+            "BonusPoints": 0
+        },
+        {
+            "Id": null,
+            "UserId": "2",
+            "InterviewId": "2",
+            "Questions": [
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with quality assurance engineering?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 2
+                },
+                {
+                    "Id": null,
+                    "InterviewId": "2",
+                    "Question": "Have you ever were connected with database developing?",
+                    "Answer": "",
+                    "Mark": 1,
+                    "Comment": "",
+                    "Weight": 3
+                }
+            ],
+            "FinalComment": "",
+            "BonusPoints": 0
+        }
+    ],
+    "Type": "INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS"
+}

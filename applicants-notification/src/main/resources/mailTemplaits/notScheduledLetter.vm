@@ -1,0 +1,10 @@
+<body>
+<img src='cid:ItAcademyLogo'>
+<h1>Dear ${name} ${surname} ! </h1>
+Your application for ${course} course was reviewed, please wait until we contact you.
+<br>
+If you have any questions, please feel free to contact your responsible HR ${HRName} ${HRSurname} by phone ${HRPhone} or email ${HRemail}.
+<br>
+Best regards,<br>
+SoftServe ItAcademy.
+</body>

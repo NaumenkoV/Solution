@@ -1,0 +1,14 @@
+<body>
+<img src='cid:ItAcademyLogo'>
+<h1>Dear ${name} ${surname} ! </h1>
+SoftServe, Inc. is pleased to inform that you have successfully passed all entrance interviews and exams.<br>
+We would like to invite you to study at our IT Academy for ${course} direction.<br>
+We offer you an opportunity to gain new knowledge and skills that are necessary for successful start at<br>
+our company and will help you in your further professional development.
+<br>We will be waiting for You at ${courseAddress}  on ${groupStartTime}.
+On the reception please call ${HRSurname} ${HRName}. The number is ${HRPhone}. The contact email is ${HRemail}.
+<br>
+<br>
+Best regards,<br>
+SoftServe ItAcademy.
+</body>

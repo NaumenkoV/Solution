@@ -1,0 +1,9 @@
+<li data-id=createGroup>
+    <div class='easyBox' id =createGroup>
+         <a href='#'> <img src='groups/images/grey-plus.jpg' onclick = 'viewAddDialog();' alt=''></a>
+             <div class='inner'>
+                 <h3 class='light'><a href='#' onclick = 'viewDialog();'>Create group</a></h3>
+                 <p>Create group</p>
+             </div>
+      </div>
+</li>

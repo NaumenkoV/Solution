@@ -1,0 +1,25 @@
+body{
+    min-width: 950px;
+}
+.header .dropdown{
+    width: 160px;
+}
+.header .navbar .dropdown-toggle{
+    text-align: center;
+    font-size: 13px;
+}
+.header .central{
+    width: 170px;
+}
+.header .navbar .brand{
+    padding-left: 20px;
+    padding-right: 40px;
+    font-size: 24px;
+}
+
+.header ul.menuIcon .user a:before {
+    content: '\1f464';
+}
+.header ul.menuIcon .logout a:before {
+    content: '\e741';
+}

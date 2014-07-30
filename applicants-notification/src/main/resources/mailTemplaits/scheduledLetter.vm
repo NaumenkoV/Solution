@@ -1,0 +1,18 @@
+<body>
+<img src='cid:ItAcademyLogo'>
+<h1>Dear ${name} ${surname} ! </h1>
+<h3>We are pleased to invite You for an interview with expert.</h3>
+<br>
+We will be waiting for You at ${courseAddress}
+on ${time}.
+<br>
+On the reception please ask for recruiter assistant ${HRName} ${HRSurname}. I will meet you.
+<br>
+To review map and extended address please visit our website <a href="https://softserve.ua/ru/university/it-academy/">It Academy</a> .
+<br>
+If you have any questions, please feel free to contact me at any time. My phone number is ${HRPhone} my email is ${HRemail}.
+<br>
+<br>
+Best regards,<br>
+SoftServe ItAcademy.
+</body>

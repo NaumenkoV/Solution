@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="interview/css/applicantPopup.css">
+
+
+
+</head>
+
+<body>
+
+<div class="applicantPopup">
+
+    <header id="applicant-header-title-popup">{{applicant.name}} {{applicant.surname}} </header>
+
+<div class="row">
+    <div class="col-xs-6 text-center" >
+
+
+
+
+
+
+        <div class="media-container"    ng-switch="MEDIA_HOLDER" >
+
+
+            <div  ng-activity-indicator="SpinnerDark"  ng-class="{'photo-spinner':AILoading}" ></div>
+            <div ng-switch-when="IMG" ng-hide="AILoading">
+
+
+            <img image-holder  class="media-holder" ng-src="{{photo||defPhoto}}"   alt="..." />
+
+
+                <a href="#"   ng-click="selectDiv('VIDEO')" popover-trigger="mouseenter"  popover-placement="bottom" popover={{imgPopover}}  class="    panel-btn photoBtn glyphicon glyphicon-camera"></a>
+             </div>
+
+
+            <div ng-switch-when="VIDEO">
+                <img class="media-holder" ng-hide="sys.localMediaStream"   ng-src="{{photo||defPhoto}}"    alt="..." image-holder/>
+                <video video-holder autoplay  ng-show="sys.localMediaStream" class="media-holder"></video>
+                <a href="#" ng-show="sys.localMediaStream"  ng-click="selectDiv('CANVAS')" class="panel-btn photoBtn glyphicon glyphicon-camera"></a>
+                <a href="#"  ng-click="selectDiv('IMG'); sys.stopVideo(); " class="panel-btn photoBtn glyphicon glyphicon-remove"></a>
+            </div>
+
+
+                <div ng-switch-when="CANVAS">
+            <img result-holder class="media-holder" ng-src="{{sys.tmpPhoto}}" alt="..."/>
+                    <a href="#"  ng-click="postPhoto(); selectDiv('IMG') " class="panel-btn photoBtn glyphicon glyphicon-ok"></a>
+                    <a href="#" ng-click=" selectDiv('VIDEO')" class="panel-btn photoBtn glyphicon glyphicon-camera"></a>
+                </div>
+
+
+            </div>
+
+
+    </div>
+
+
+    <div class="col-xs-6">
+
+        <div  id="description">
+            <ul class="list-group">
+                <li class="list-group-item " ><b>Name</b>:  {{applicant.name}}</li>
+                <li class="list-group-item"><b>Lastname</b>:  {{applicant.surname}}</li>
+                <li class="list-group-item"><b>Age</b>:  {{Date.now() - applicant.birthday| date:'yy'| limitTo:100}}</li>
+                <li class="list-group-item"><b>Email</b>:  <a href="mailto:#">{{applicant.email}}</a></li>
+                <li class="list-group-item"><b>CV</b>:  <a ng-href="{{cv}}">{{cvTitle}}</a> </li>
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>

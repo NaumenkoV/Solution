@@ -1,0 +1,214 @@
+.users.row-fluid.topSpace {
+    margin-top: 0px;
+}
+.users.sectionFaq {
+    padding: 0;
+}
+.users.sectionFaq .accordion .accordion-inner p:before {
+    position: absolute;
+    top: 0;
+    left: -38px;
+    content: '\1f464';
+    font-family: 'entypo';
+    font-size: 24px;
+    color: #000000;
+}
+.person.entypo {
+    font-size: 24px;
+    margin-left: 10px;
+}
+.person.entypo.pencil {
+    margin-left: 800px;
+}
+.users.lineBox.right {
+    text-align: right;
+    margin: 20px 0 15px 0;
+}
+
+/*DIALOG*/
+
+.ui-widget {
+    font-size: 1.2em;
+}
+
+.ui-widget-content {
+    border: 2px solid #888e8d;
+    color: #888e8d;
+}
+
+.ui-dialog {
+    left: 0;
+    outline: 0 none;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+}
+
+.ui-dialog .ui-dialog-content {
+    border: 0 none;
+    overflow: auto;
+    position: relative;
+    padding: 0 !important;
+}
+
+.ui-widget-header {
+    background: #888e8d;
+    border: 0;
+    color: #fff;
+    font-weight: normal;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+    font-size: 1em;
+    color: #888e8d;
+}
+.ui-dialog-titlebar-close{
+    position: absolute;
+    right: .3em;
+    top: 50%;
+    width: 21px;
+    margin: -10px 0 0 0;
+    padding: 1px;
+    height: 20px;
+    text-align: center;
+}
+.ui-button .ui-button-text {
+    display: none;
+}
+.ui-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    margin-top: -9px;
+}
+.ui-state-default .ui-icon {
+    background-image: url(icons/ui-icons_888888_256x240.png);
+}
+.ui-icon-closethick {
+    background-position: -96px -128px;
+}
+
+#user-box,
+#delete-user-box{
+    background-color: #dfdeda;
+    display: inline-block;
+    padding: 20px 70px 80px 70px;
+}
+
+#user-box h2{
+    padding:0;
+    margin:0;
+    font: bold 30px;
+}
+
+#user-box fieldset {
+    display: block;
+    width: 350px;
+    height: 400px;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+}
+#user-box .btn,
+#delete-user-box .btn{
+    background-color: #ff6138;
+    margin-top: 10px;
+}
+#user-box .saveButton{
+    float: left;
+    margin-left: 60px;
+}
+#user-box .cancelButton{
+    float: right;
+}
+
+#user-box.fieldgroup {
+    display: inline-block;
+    padding: 8px 10px;
+    width: 340px;
+}
+#user-box .fieldgroup label {
+    font-size: 16px;
+    float: left;
+    text-align: right;
+    width: 110px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#user-box .fieldgroup input,
+#user-box .fieldgroup textarea,
+#user-box .fieldgroup select {
+    float: right;
+    margin: 10px 0;
+    height: 25px;
+    width: 220px;
+    font-size: 14px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 2px;
+}
+#user-box .fieldgroup label.error {
+    font-size: 11px;
+    color: #FB3A3A;
+    margin: 0px 0 0px 129px;
+    padding: 0;
+    text-align: right;
+    width: 220px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    line-height: 100%;
+}
+#user-box .fieldgroup {
+    position: relative;
+    height: 48px;
+}
+
+#userForm{
+    margin-bottom: 0px;
+}
+
+.users .sectionFaq .accordion .accordion-inner {
+    padding: 10px 25px 10px 60px;
+}
+
+.users .sectionFaq .accordion .btn-icon {
+    cursor: pointer;
+}
+#cancelDUButton {
+    float: right;
+    width: 200;
+}
+#okInfButton {
+    float: left;
+    margin-left: 30px;
+}
+
+#okDUButton {
+    float: left;
+    width: 200;
+}
+
+.deleteButton {
+    float: right;
+}
+
+.editButton {
+    float: right;
+}
+
+#createGroup {
+    height: 401;
+}

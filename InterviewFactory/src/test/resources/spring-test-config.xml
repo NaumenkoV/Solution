@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+
+
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.softserveinc.ita.interviewfactory"/>
+
+    <mvc:annotation-driven/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="httpRequestExecutor" class="com.softserveinc.ita.interviewfactory.HttpRequestExecutorFactoryMock" >
+        <constructor-arg name="baseUrl" value="http://localhost:8080"/>
+    </bean>
+
+    <!--aux/utils-->
+
+    <bean id="interviewUtilJson" class="com.softserveinc.ita.utils.impl.InterviewJsonUtilGsonImpl"/>
+    <bean id="jsonUtil" class="com.softserveinc.ita.utils.impl.JsonUtilJaxsonImpl"/>
+    <!--external services-->
+
+    <bean id="interviewDAO" class="com.softserveinc.ita.interviewfactory.dao.mock.InterviewDAOMock"/>
+    <bean id="questionInformationDAO" class="com.softserveinc.ita.interviewfactory.dao.mock.QuestionInformationDOAMock"/>
+    <bean id="questionsBlockDAO" class="com.softserveinc.ita.interviewfactory.dao.mock.QuestionsBlockDAOMock"/>
+
+
+    <bean id="interviewFactory" class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+        <property name="serviceLocatorInterface" value="com.softserveinc.ita.interviewfactory.factory.InterviewFactory" />
+    </bean>
+
+    <!--<import resource="dao-test-context.xml"/>-->
+
+</beans>

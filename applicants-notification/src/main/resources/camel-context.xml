@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="javasendertest@gmail.com"/>
+        <property name="password" value="ldbtyo946fyfh"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.starttls.required">true</prop>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl">
+        <constructor-arg name="baseUrl" value="http://localhost:8080"/>
+    </bean>
+
+    <bean id="velocityEngine"
+          class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <props>
+                <prop key="resource.loader">class</prop>
+                <prop key="class.resource.loader.class">
+                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!-- This creates an embedded ActiveMQ Broker -->
+    <broker xmlns="http://activemq.apache.org/schema/core" useJmx="true" persistent="false"
+            brokerName="myBroker2" id="broker2">
+        <transportConnectors>
+            <transportConnector uri="vm://myBroker2"/>
+        </transportConnectors>
+    </broker>
+    <!-- Lets connect the Camel ActiveMQ component to the embedded broker.
+         See http://camel.apache.org/activemq.html for more information.
+    -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="vm://myBroker2"/>
+    </bean>
+
+    <!-- END SNIPPET: activemq -->
+
+    <!-- START SNIPPET: ex -->
+    <bean id="jsonUtil" class="com.softserveinc.ita.utils.impl.JsonUtilJaxsonImpl"/>
+    <camelContext xmlns="http://camel.apache.org/schema/spring" depends-on="broker2"/>
+    <!-- END SNIPPET: ex -->
+
+</beans>

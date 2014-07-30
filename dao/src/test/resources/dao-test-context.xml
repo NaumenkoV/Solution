@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!-- Scans within the base package of the application for @Components to
+        configure as beans -->    <context:annotation-config/>
+    <context:component-scan base-package="com.softserveinc.ita.dao"/>
+
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+    <context:property-placeholder location="classpath:test.properties"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.softserveinc.ita.dao"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.softserveinc.ita.entity.Course</value>
+                <value>com.softserveinc.ita.entity.Group</value>
+                <value>com.softserveinc.ita.entity.Question</value>
+                <value>com.softserveinc.ita.entity.Role</value>
+                <value>com.softserveinc.ita.entity.User</value>
+                <value>com.softserveinc.ita.entity.Applicant</value>
+                <value>com.softserveinc.ita.entity.Appointment</value>
+                <value>com.softserveinc.ita.entity.Interview</value>
+                <value>com.softserveinc.ita.entity.Question</value>
+                <value>com.softserveinc.ita.entity.QuestionInformation</value>
+                <value>com.softserveinc.ita.entity.QuestionsBlock</value>
+            </list>
+        </property>
+    </bean>
+</beans>
