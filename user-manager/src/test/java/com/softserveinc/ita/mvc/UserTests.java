@@ -51,17 +51,9 @@ public class UserTests extends BaseMVCTest {
     public void testDeleteUserByIDAndExpectedDeletedSuccessfully() throws Exception {
         String userID = "122";
 
-//        String goodResponse = jsonUtil.toJson(userID);
         mockMvc.perform(delete(  "/" + userID))
                .andExpect(content().string(userID));
     }
-
-//    @Test
-//    public void testDeleteUserByIdAndExpectedDeleteException() throws Exception { //TODO: test how hibernate will throw exception
-//        String userID = "124";
-//        mockMvc.perform(delete(  "/" + userID))
-//                .andExpect(status().isNotFound());
-//    }
 
     @Test
     public void testGetValidUserByIDAndExpectIsOK() throws Exception {
@@ -172,17 +164,6 @@ public class UserTests extends BaseMVCTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
-
-//    @Test
-//    public void testPostNewUserWithDuplicatedIDAndExpectInternalServerError() throws Exception { /TODO: test how hibernate will throw exception
-//        User testUser = new User("1");
-//        String jsonUser = jsonUtil.toJson(testUser);
-//        mockMvc.perform(post("/")
-//                .content(jsonUser)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isInternalServerError());
-//    }
 
     @Test
     public void testGetUserListAndExpectIsOk() throws Exception {

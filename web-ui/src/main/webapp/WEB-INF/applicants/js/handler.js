@@ -1,11 +1,14 @@
 var applicantsIDList = {};
 var pageTemplate = {};
 var applicants = [];
-var groupCapacity;
 var userList = [];
+var groupID, groupCapacity;
+//on document ready
 $(function () {
+    //first of all get groupid from cookies
     groupID = getParamByName('groupID');
-    $('nocontent').toggle();
+    //temporary kostyl'
+    $('.nocontent').toggle();
     //load page template
     $.ajax({
         async: false,
@@ -38,6 +41,7 @@ loadApplicantsIDListByStatus = function (status) {
         }
     });
 };
+//load all applicants with a given status within a given group
 loadApplicantsByStatus = function (status) {
     for (var property in applicantsIDList) {
         if (applicantsIDList.hasOwnProperty(property) && applicantsIDList[property]['status'] == status) {
@@ -47,12 +51,16 @@ loadApplicantsByStatus = function (status) {
                 dataType: "json",
                 type: "GET",
                 success: function (data) {
+                    //create element for each applicant and push it to the list
+                    var element = {};
+                    //parse applicant's birthday
                     var date = new Date(data.birthday);
-                    data['birthday'] = date.getUTCMonth() + '/' + date.getUTCDate() + '/' + date.getUTCFullYear();
+                    data['birthday'] = ('0' + +(date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2) + '/' + date.getFullYear();
+                    //set rank and status
                     data['rank'] = applicantsIDList[property]['rank'];
                     data['status'] = status;
                     var appID = {};
-                    var element = {};
+                    //do different things depending on applicant's status
                     switch (applicantsIDList[property]['status']) {
                         case 'NOT_SCHEDULED':
                             element = {applicant: data, appointment: {availableUsers: userList, scheduledUsers: []}};
@@ -63,14 +71,17 @@ loadApplicantsByStatus = function (status) {
                             element = {applicant: data, appointmentID: appID};
                             break;
                         case 'EMPLOYED':
+                            //set employed flag
                             data['employed'] = true;
                         case 'PASSED':
                         case 'NOT_PASSED':
-                            data.photo = '/repository/img/applicant/' + property + '?height=200&width=150';
+                            //set photo url
+                            data.photo = '/repository/imgfile/applicant/' + property + '?height=150&width=150';
                             appID = loadAppointmentID(property);
                             element = {applicant: data, appointmentID: appID};
                             break;
                     }
+                    //push element to the list
                     applicants.push(element);
                 }, error: function () {
                     console.log('content', "Failed to load applicant from server by id:" + property);
@@ -109,13 +120,19 @@ loadUsersList = function () {
         }
     });
 };
+//submit list of applicants, saving their new ranks
 submitList = function () {
+    //list to send to server
     var list = {};
-    var divlist = $('div.interviewed').children('div.container');
+    //list of divs representing applicants
+    var divlist = $('div.interviewed').children('div.applicantContainer');
     $(divlist).each(function (index) {
+        //get applicantid from current div
         var applicant = $(this).children('div.applicant')[0];
         var applicantID = $(applicant).attr('applicantID');
+        //add new element to a list
         list[applicantID] = {};
+        //set rank and status
         if (groupCapacity) {
             if (index < groupCapacity) {
                 list[applicantID]['status'] = 'PASSED';
@@ -153,7 +170,6 @@ setEventListeners = function () {
     $('.interview').click(function (event) {
         beginInterview(event.target);
     });
-//    $("input[type=file]").nicefileinput();
     //Event listener for dialog
     $("#dialog").dialog({
         buttons: {
@@ -187,20 +203,25 @@ setEventListeners = function () {
     });
     $("button.submit").button({disabled: true});
     $("#sort").click(function () {
-        sort($('div.interviewed').children('div.container')[0], [], true);
+        sort($('div.interviewed').children('div.applicantContainer')[0], [], true);
     });
     $("#submitList").click(function () {
         submitList();
     });
     $(".editApplicant").click(function (event) {
+        //find editable elements in the div where button was clicked
         var editable = $(event.target).closest('div').find('.editable');
+        //and make them enabled
         $(editable).removeAttr('disabled');
         var submitButton = $(event.target).closest('div').find('button.editable');
         $(submitButton).button({disabled: false});
+        //disable itself
         $(event.target).closest('button').button({disabled: true});
     });
     $(".editAppointment").click(function (event) {
+        //find div where button was clicked
         var parentdiv = $(event.target).closest('div.schedule');
+        //find all editable elements and make them enabled
         var editable = parentdiv.find('input.schedulable');
         $(editable).removeAttr('disabled');
         parentdiv.find('button.removeUser').button({disabled: false});
@@ -208,6 +229,7 @@ setEventListeners = function () {
             parentdiv.find('button.addUser').button({disabled: false});
         }
         parentdiv.find('button.postAppointment').button({disabled: false});
+        //and disable itself
         $(event.target).parent().button({disabled: true});
     });
     $(".addUser").click(function (event) {
@@ -219,30 +241,34 @@ setEventListeners = function () {
     $('.submit, .add').click(function (event) {
         submitApplicant(event);
     });
-    $('a').button();
+    $('a.openCV').button();
+    $('a.done').button();
     $('.notify').click(function (event) {
         notifyApplicant(event.target);
     });
     $('#notifications').click(function (event) {
         notifyListOfApplicants(event.target);
     });
-    $('.employ').click(function (event) {
+    $('a.employ').click(function (event) {
         employApplicant(event.target);
     });
 };
-notifyListOfApplicants = function (target) {
+//notify all of the applicants present on the page
+notifyListOfApplicants = function () {
     var list = [];
     var hrid = getHRID();
-    $(target).closest('div.applicant').siblings('div.applicant').addBack().each(function (index, element) {
-        list.push({applicantId: $(element).attr('applicantID'),
+    $('div.applicant').each(function (index, element) {
+        list.push({applicantId: $(element).attr('applicantid'),
             groupId: groupID,
             responsibleHrId: hrid
         });
     });
     notify(list);
 };
+//notify one applicant
 notifyApplicant = function (target) {
-    var appid = $(target).closest('div.applicant').attr('applicantID');
+    //button is clicked in the applicant's div, so we take his id from the div
+    var appid = $(target).closest('div.applicant').attr('applicantid');
     notify([
         {applicantId: appid,
             groupId: groupID,
@@ -250,40 +276,54 @@ notifyApplicant = function (target) {
         }
     ]);
 };
+//initialise accordion, set event listeners
 postRender = function () {
     $(".accordion").accordion({heightStyle: "content", "collapsible": true, active: false, header: ".accordion-section"});
     setEventListeners();
 };
-sort = function (item, apps, light) {
+//sort div items representing applicants
+sort = function (item, light) {
+    //accordion
     var sortableList = $('div.interviewed');
-    var listitems = $('div.container', sortableList);
+    //accordion items representing applicants
+    var listitems = $('div.applicantContainer', sortableList);
+    //sort function
     listitems.sort(function (a, b) {
+        //get id of applicant that is represented by 'a' div and 'b' div
         var appIDa = $(a).children('div.applicant').attr('applicantid');
         var appIDb = $(b).children('div.applicant').attr('applicantid');
+        //sort elements by applicants rank, get this rank from in-memory elements
         var indexOfAppA = elementByApplicantID(appIDa)['applicant']['rank'];
         var indexOfAppB = elementByApplicantID(appIDb)['applicant']['rank'];
+        //when both of them have valid ranks
         if (indexOfAppA != -1 && indexOfAppB != -1) {
             return indexOfAppA > indexOfAppB;
         }
+        //otherwise sort by total points(interview)
         if (indexOfAppA == -1 && indexOfAppB == -1) {
             return $(a).children("h3").children("span.points").text()
                 < $(b).children("h3").children("span.points").text();
         }
+        //only one of them is ranked
         return indexOfAppA != -1;
     });
+    //set sorted items to accordion
     sortableList.append(listitems);
+    //highlight passed item if needed
     if (light) {
         highlight(item);
     }
 };
+//get in-memory element {applicant, appointment} by applicantid
 elementByApplicantID = function (value) {
     for (var i = 0; i < applicants.length; i += 1) {
         if (applicants[i]['applicant']['id'] == value) {
             return applicants[i];
         }
     }
-    return -1;
+    return null;
 };
+//get appointmentID by applicantid and groupid
 loadAppointmentID = function (applicantID) {
     var result = -1;
     $.ajax({
@@ -293,16 +333,20 @@ loadAppointmentID = function (applicantID) {
         type: "GET",
         success: function (appointmentID) {
             result = appointmentID;
+        },
+        error: function () {
+            console.log("error while loading appointmentid by groupid and applicantid");
         }
     });
     return result;
 };
+//send notification json
 notify = function (object) {
     $.ajax({
         async: false,
-        url: '/notification',
+        url: '/notification/',
         contentType: "application/json",
-        dataType: "application/json",
+        accept: "application/json",
         type: 'POST',
         data: JSON.stringify(object),
         success: function () {

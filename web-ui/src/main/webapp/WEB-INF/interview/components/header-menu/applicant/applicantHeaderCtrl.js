@@ -74,13 +74,6 @@ $scope.postPhoto = function(){
         $scope.defPhoto = $scope.sys.tmpPhoto;
     });
 }
-
-
-
-
-
-
-
   $scope.sys.putVideo = function (elem) {
       $scope.isWebCamAsk = true;
 

@@ -23,7 +23,7 @@ $(function() {
 
     function sendUser(user) {
         var failedAction = (requestType == "POST") ? 'add' : 'edit';
-        if((requestType == "POST") && userWithThisEmailExists(user)){
+        if(userWithThisEmailExists(user)){
             $("#userErrContent").append('Impossible to ' + failedAction + ' user. User with this email already exists.');
             $("#dialog-form-error-user").dialog( "open" );
             return false;
@@ -70,7 +70,7 @@ $(function() {
             type: 'GET',
             success: function (data) {
                 var existingUser = data;
-                success = (existingUser.email == user.email);
+                success = (existingUser.email == user.email && existingUser.id != user.id);
             },
             error: function (data) {
                 if (data.responseText) {

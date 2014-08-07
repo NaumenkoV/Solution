@@ -44,10 +44,11 @@ public class ChatEndpoint {
 
             if (clients.get(currentSession).equals(message.getNickname())) {
                 response.setSent(false);
-            } else response.setSent(true);
+                currentSession.getBasicRemote().sendObject(response);
+                response.setSent(true);
+                sentToAllExceptThis(session, response);}
 
             logger.info("Sent message to all from " + currentNickName + " session: " + currentSession.getId());
-            sentToAll(session, response);
         }
 
     }

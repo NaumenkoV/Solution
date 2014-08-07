@@ -113,17 +113,16 @@ public class HttpRequestExecutorTests extends BaseHttpReqTest {
 
     @Test
     public void testGetListObjectsIdByPrams() throws Exception {
-      List<String> expectedList = new LinkedList<String>();
-        expectedList.add(user.getId());
+      String expectedID = user.getId();
 
         mockServer.expect(requestTo(service.getBaseUrl()+"/"+ urlSubclass +"s?"+
                 appointment.getClass().getSimpleName().toLowerCase()+"=" +
                 appointment.getAppointmentId()+"&"+ user.getClass().getSimpleName().toLowerCase()+"="+user.getId()))
                 .andExpect(method(HttpMethod.GET))
-                .andRespond(withSuccess(utilJson.toJson(expectedList),MediaType.APPLICATION_JSON));
+                .andRespond(withSuccess(utilJson.toJson(expectedID),MediaType.APPLICATION_JSON));
 
 
-        assertEquals(expectedList, service.getListObjectsIdByPrams(user.getClass(),parametersMap) );
+        assertEquals(utilJson.toJson(expectedID), service.getListObjectsIdByPrams(user.getClass(),parametersMap) );
         mockServer.verify();
     }
 

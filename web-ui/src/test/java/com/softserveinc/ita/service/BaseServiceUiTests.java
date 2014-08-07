@@ -5,6 +5,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:web-ui-spring-config.xml"})
+@ContextConfiguration(locations = {"classpath:web-ui-service-testconfig.xml"})
 public abstract class BaseServiceUiTests {
 }

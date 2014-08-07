@@ -9,7 +9,7 @@ $(function() {
         resizable: false,
         dialogClass: 'dialog',
         close: function() {
-            $("#questionErrContent").empty();
+            $("#questionsErrContent").empty();
         }
     });
 

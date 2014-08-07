@@ -7,6 +7,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration({"classpath:applicant-spring-config.xml"})
+@ContextConfiguration({"classpath:applicant-test-spring-config.xml"})
 public abstract class BaseMVCTest {
 }

@@ -1,6 +1,6 @@
 (function () {
 
-    var app = angular.module('interview', ['ui.bootstrap', 'questionMod', 'applicantPopupModule', 'finalComMod','chatMod']);
+    var app = angular.module('interviewApp', ['ui.bootstrap', 'questionMod', 'applicantPopupModule', 'finalComMod','chatMod']);
 
     //be sure to inject $scope and $location
     var changeLocation = function (url, forceReload) {
@@ -29,8 +29,7 @@
             // Retrieving a cookie
             var userId = $cookies.userId;
             var appointmentId = $cookies.appointmentId;
-            console.log("user id = " + userId);
-            console.log("appointment id = " + appointmentId);
+            
             //if one of the cookie is absent
             if (!userId || !appointmentId) {
                 changeLocation("/sorry?code=" + 1, true);
@@ -47,37 +46,46 @@
                             alert("Unfortunately, unable to update time of interview. Timer may have strange behaviour.")
                         });
                     }
-                app.value('Appointment', response);
-                Appointment = response;
-
-            }).error(function (error) {
+                    app.value('Appointment', response);
+                    Appointment = response;
+                    var usersId = Appointment.userIdList;
+                    var allowed = false;
+                    for (var i = 0; i < usersId.length; i++) {
+                        if (usersId[i] === userId) {
+                            allowed=true;
+                        }
+                    }
+                    if(!allowed){
+                        window.location = "/sorry?code=5";
+                    }
+                }).error(function (error) {
                     //if request failed
                     changeLocation("/sorry?code="+2,true);
-            })
-            .then(function(){
-                var initRequests = [
-                    $http.get(baseUrl + 'users/'+userId)
-                    .then(function (response) {
-                        app.value('User', response.data);
-                    }),
-                    $http.get(baseUrl + 'applicants/'+ Appointment.applicantId)
-                    .then(function (response) {
-                        app.value('Applicant', response.data);
-                    })
-                ];
-                $q.all(initRequests).then(function(){
-                    //Afterall, we are ready to initialize Ng-app.
-                    angular.bootstrap(document, ['interview']);
-                    },
-                    function() {
+                })
+                .then(function(){
+                    var initRequests = [
+                        $http.get(baseUrl + 'users/'+userId)
+                            .then(function (response) {
+                                app.value('User', response.data);
+                            }),
+                        $http.get(baseUrl + 'applicants/'+ Appointment.applicantId)
+                            .then(function (response) {
+                                app.value('Applicant', response.data);
+                            })
+                    ];
+                    $q.all(initRequests).then(function(){
+                            //Afterall, we are ready to initialize Ng-app.
+                            angular.bootstrap(document, ['interviewApp']);
+                        },
+                        function() {
                             changeLocation("/sorry?code="+3,true);
-                    });
-            });
+                        });
+                });
 
         }
     );
 
-    app.controller('ModalDemoCtrl', ['$timeout', '$scope', '$modal', '$log', 'Applicant', 'Appointment', 'User', function ($timeout, $scope, $modal, $log, Applicant, Appointment, User) {
+    app.controller('ModalDemoCtrl', ['Interview','$timeout', '$scope', '$modal', '$log', 'Applicant', 'Appointment', 'User', function (Interview, $timeout, $scope, $modal, $log, Applicant, Appointment, User) {
 
         $scope.curentTime = Date.now();
 

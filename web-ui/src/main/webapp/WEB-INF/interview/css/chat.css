@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
+[scroll-glue]{
+    overflow-y: scroll;
+}
+
 #message-content {
     height: calc(100% - 45px);
     width: 100%;
@@ -61,7 +65,7 @@
     font-size: 11px;
     font-weight: bold;
     color: #585858;
-    margin-left: 50px;
+    margin-left: 70px;
     margin-bottom: 5px;
 }
 
@@ -85,8 +89,9 @@
 }
 
 .sent .dm-nickname {
-    padding-left: 100px;
+    padding-left: 270px;
 }
+
 
 .dm-content .time {
 

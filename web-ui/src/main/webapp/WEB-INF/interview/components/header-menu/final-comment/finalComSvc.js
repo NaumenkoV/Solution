@@ -1,10 +1,10 @@
 angular.module('finalComMod').factory('Comment',['$http','Appointment', function($http, Appointment) {
+    var baseUrl = "http://176.36.11.25:8080/interviews";
     return {
         update: function(finalComment){
-            finalComment.interviewId = Appointment.appointmentId;
-            if(!finalComment.bonusPoints){
-                finalComment.bonusPoints = 0;
-            }
-            return $http({method: 'PUT', url: "/interviewing/final_comment/", data : finalComment});
+            return $http({method: 'GET', url: baseUrl+"/" + Appointment.appointmentId}).then(function(response){
+                response.data.finalComment = finalComment;
+                $http({method: 'PUT', url: baseUrl+"/", data: response.data});
+            })
         }
     }}])

@@ -148,7 +148,7 @@ public class ServiceGroupTests extends ServiceGroupBaseTest {
         verify(groupDAO, atLeastOnce()).updateGroup(group);
     }
 
-    @Test(expected = GroupWithThisNameIsAlreadyExists.class)
+    @Test(expected = GroupDoesntExistException.class)
     public void testUpdateGroupForExistingNameAndExpectException() throws Exception {
         Group group = new Group("id1");
         when(groupDAO.updateGroup(group)).thenThrow(Exception.class);

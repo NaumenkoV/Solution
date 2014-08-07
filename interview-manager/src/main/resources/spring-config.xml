@@ -29,7 +29,7 @@
     </bean>
 
     <bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl" >
-        <constructor-arg name="baseUrl" value="http://176.36.11.25:8080"/>
+        <constructor-arg name="baseUrl" value="http://localhost:8080"/>
     </bean>
 
     <!--aux/utils-->

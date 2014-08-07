@@ -36,7 +36,7 @@ function viewGroups() {
                         ref: 'group?groupID=' + data[index].groupID,
                         image: data[index].course.imageRef,
                         courseName: "Course : " + data[index].course.name,
-                        groupName: "Group : " + data[index].groupName,
+                        groupName: data[index].groupName,
                         groupId: data[index].groupID
                     }
                     output += Mustache.render(template, view);

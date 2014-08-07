@@ -6,14 +6,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.w3.org/2001/XMLSchema-instance ">
 
-    <context:annotation-config/>
-    <mvc:annotation-driven/>
-    <bean id="jsonUtil" class="com.softserveinc.ita.utils.impl.JsonUtilJaxsonImpl"/>
-    <context:component-scan base-package="com.softserveinc.ita"/>
+<context:annotation-config/>
+<mvc:annotation-driven/>
+<bean id="jsonUtil" class="com.softserveinc.ita.utils.impl.JsonUtilJaxsonImpl"/>
+<context:component-scan base-package="com.softserveinc.ita.mocks"/>
+<context:component-scan base-package="com.softserveinc.ita.controller"/>
+<context:component-scan base-package="com.softserveinc.ita.service"/>
 
-    <bean id="viewResolverService" class="com.softserveinc.ita.service.impl.ViewResolverServiceImpl"/>
-
-    <bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl">
-        <constructor-arg name="baseUrl" value="http://localhost:8080"/>
-    </bean>
+<bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl">
+    <constructor-arg name="baseUrl" value="http://localhost:8080"/>
+</bean>
 </beans>

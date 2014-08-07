@@ -66,7 +66,7 @@ public class GroupController {
     @RequestMapping(value = "/editGroup", method = RequestMethod.PUT, produces = "application/json")
     public
     @ResponseBody
-    Group updateGroup(@RequestBody Group group) throws GroupWithThisNameIsAlreadyExists {
+    Group updateGroup(@RequestBody Group group) throws GroupWithThisNameIsAlreadyExists, GroupDoesntExistException {
         return groupService.updateGroup(group);
     }
 

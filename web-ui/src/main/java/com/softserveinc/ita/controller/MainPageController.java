@@ -40,6 +40,18 @@ public class MainPageController {
                 model.addObject("error", "Can't load User/Applicant");
                 model.addObject("description", "Either services are unreachable for the moment or you're asking for nonexistent data");
                 break;
+            case 4:
+                model.addObject("error", "Can't load Interview");
+                model.addObject("description", "Either services are unreachable for the moment or you're asking for nonexistent data");
+                break;
+            case 5:
+                model.addObject("error", "Not yours");
+                model.addObject("description", "Probably it is not the interview, where you should be present");
+                break;
+            case 6:
+                model.addObject("error", "Deja Vu");
+                model.addObject("description", "It seems that you're trying to visit the same interview you visited not too long ago.");
+                break;
             default:
                 model.addObject("error", "We don't know why you are here");
                 model.addObject("description", "Probably there is no such error code");

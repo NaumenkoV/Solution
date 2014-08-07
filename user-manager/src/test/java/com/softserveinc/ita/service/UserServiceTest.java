@@ -55,12 +55,6 @@ public class UserServiceTest extends BaseServiceTest {
         assertEquals(userService.getAllUsersID(), usersIDList);
     }
 
-    //    @Test(expected = UserAlreadyExistsException.class)
-//    public void testAddNewUserWithDuplicateIDThrowsException() throws Exception { /TODO: test how hibernate will throw exception
-//        User testUser = new User("1");
-//        userService.postNewUser(testUser);
-//    }
-
     @Test(expected = UserDoesNotExistException.class)
     public void testEditUserWithNotExistingIdAndExpectException() throws UserDoesNotExistException, EmptyUserException {
         User user = new User("id4");
@@ -80,11 +74,6 @@ public class UserServiceTest extends BaseServiceTest {
         user.setName("name");
         userService.editUser(user);
     }
-//    @Test(expected = UserAlreadyExistsException.class)
-//    public void testAddNewUserWithDuplicateIDThrowsException() throws Exception { /TODO: test how hibernate will throw exception
-//        User testUser = new User("1");
-//        userService.postNewUser(testUser);
-//    }
 
     @Test
     public void testAddNewUserWithOkIDReturnsThatUser() throws Exception {

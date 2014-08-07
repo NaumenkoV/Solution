@@ -190,7 +190,7 @@ $(function () {
                 location.reload();
             },
             error: function (data) {
-                $('#Information').html(data.responseJSON.reason);
+                $('#Information').html('Group with this name already exists');
                 viewInformationDialog();
                 console.log("" + data);
             }
@@ -212,6 +212,8 @@ $(function () {
                 location.reload();
             },
             error: function (data) {
+                $('#Information').html('Group with this name already exists');
+                viewInformationDialog();
                 console.log("" + data);
             }
         });
@@ -253,7 +255,7 @@ $(function () {
             groupName: {
                 required: true,
                 minlength: 3,
-                maxlength: 7
+                maxlength: 10
             },
             groupAddress: {
                 required: true,

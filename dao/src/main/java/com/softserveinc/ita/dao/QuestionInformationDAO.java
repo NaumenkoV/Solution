@@ -1,5 +1,6 @@
 package com.softserveinc.ita.dao;
 
+
 import com.softserveinc.ita.entity.QuestionInformation;
 
 public interface QuestionInformationDAO {

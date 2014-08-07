@@ -49,9 +49,8 @@
                 <value>com.softserveinc.ita.entity.Applicant</value>
                 <value>com.softserveinc.ita.entity.Appointment</value>
                 <value>com.softserveinc.ita.entity.Interview</value>
-                <value>com.softserveinc.ita.entity.Question</value>
-                <value>com.softserveinc.ita.entity.QuestionInformation</value>
                 <value>com.softserveinc.ita.entity.QuestionsBlock</value>
+                <value>com.softserveinc.ita.entity.QuestionInformation</value>
             </list>
         </property>
     </bean>

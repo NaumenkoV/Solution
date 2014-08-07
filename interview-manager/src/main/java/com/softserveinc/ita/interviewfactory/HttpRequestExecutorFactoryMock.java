@@ -138,7 +138,7 @@ public class HttpRequestExecutorFactoryMock extends AbstractHttpRequestExecutorR
     }
 
     @Override
-    public List<String> getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException {
-        return appointmentIdList1;
+    public String getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException {
+        return appointment5.getAppointmentId();
     }
 }

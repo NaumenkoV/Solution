@@ -13,7 +13,7 @@ public interface HttpRequestExecutor {
     List<String> getAllObjectsID(Class objectClass) throws HttpRequestException;
 
 
-    List<String> getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException;
+    String getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException;
 
     <T> T getObjectByID(String id, Class<T> objectClass) throws HttpRequestException;
 

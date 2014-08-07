@@ -1,4 +1,4 @@
-var app = angular.module('chatMod', ['ngAnimate'])
+var app = angular.module('chatMod', ['ngAnimate', 'luegg.directives'])
 
 app.directive('ngEnter', function () {
     return {
@@ -19,14 +19,22 @@ app.directive('ngEnter', function () {
     }
 })
 
-app.controller('ChatController', ['$scope', '$rootScope','ChatService','User', function ($scope,$rootScope,ChatService,User) {
+app.controller('ChatController', ['$scope', 'ChatService','User', '$rootScope', function ($scope,ChatService, User, $rootScope) {
 
     $scope.message = {};
     $scope.message.nickname = User.name + ' ' + User.surname;
     $scope.messages = [];
+    $scope.glued = true;
 
     var $cookies = angular.injector(['ngCookies']).get('$cookies');
     var appointmentId = $cookies.appointmentId;
+    var message = {};
+
+    $rootScope.$on('New question was added', function(event, msg) {
+        message.nickname = 'Server';
+        message.text = msg;
+        $scope.messages.push(message);
+    });
 
     ChatService.subscribe(function(message) {
 

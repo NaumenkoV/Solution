@@ -75,47 +75,6 @@ public class AppointmentTests extends BaseMVCTest {
         assertFalse("Appointment 2 not appropriate for this request", objectTest.toString().equals(appointmentJson));
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test
-    public void StartTimeAlreadyPassedException() throws DateException {
-        thrown.expect(DateException.class);
-        thrown.expectMessage("Start time has already passed");
-
-        String applicantId = "testApplicantId";
-        List<String> users = new ArrayList();
-        users.add("testUserId");
-        Appointment app = new Appointment(users, applicantId, Long.valueOf(11), Long.valueOf(2));
-        app.dateValidation(app.getStartTime(), app.getDurationTime());
-    }
-
-    @Test
-    public void WrongDurationTimeException() throws DateException {
-        thrown.expect(DateException.class);
-        thrown.expectMessage("Wrong duration time");
-
-        String applicantId = "testApplicantId";
-        List<String> users = new ArrayList();
-        users.add("testUserId");
-        Appointment app = new Appointment(users, applicantId, Long.valueOf(11), Long.valueOf(-2));
-        app.dateValidation(app.getStartTime(), app.getDurationTime());
-    }
-
-    @Test
-    public void TooLongDurationTimeException() throws DateException {
-        thrown.expect(DateException.class);
-        thrown.expectMessage("Too long duration time");
-
-        String applicantId = "testApplicantId";
-        List<String> users = new ArrayList();
-        users.add("testUserId");
-        long currentDate = new Date().getTime() + 1;
-        long bigDurationTime = 1000 * 60 * 60 * 12 + 1;
-        Appointment app = new Appointment(users, applicantId, currentDate, bigDurationTime);
-        app.dateValidation(app.getStartTime(), app.getDurationTime());
-    }
-
     @Test
     public void testGetAppointmentByApplicantIdAndExpectIsOkWithFirstAppointmentFromList() throws Exception {
 

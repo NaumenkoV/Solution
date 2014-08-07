@@ -36,13 +36,24 @@ public class OrmConfig {
         return sessionFactory;
     }
 
+//    @Bean
+//    public DataSource restDataSource() {
+//        BasicDataSource dataSource = new BasicDataSource();
+//        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+//        dataSource.setUrl(env.getProperty("jdbc.url"));
+//        dataSource.setUsername(env.getProperty("jdbc.username"));
+//        dataSource.setPassword(env.getProperty("jdbc.password"));
+//
+//        return dataSource;
+//    }
+
     @Bean
     public DataSource restDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-        dataSource.setUrl(env.getProperty("jdbc.url"));
-        dataSource.setUsername(env.getProperty("jdbc.username"));
-        dataSource.setPassword(env.getProperty("jdbc.password"));
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/INTERVIEW");
+        dataSource.setUsername("root");
+        dataSource.setPassword("A1k40jna");
 
         return dataSource;
     }

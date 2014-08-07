@@ -33,11 +33,10 @@ public class InterviewServiceImpl implements InterviewService {
         List<Interview> listForReturn = new ArrayList<>();
         Map<Class, String> httpApplicantParamMap = new HashMap<>();
         httpApplicantParamMap.put(Applicant.class, applicantId);
-        List<String> listWithAppointmentsId = httpRequestExecutor.getListObjectsIdByPrams(Appointment.class, httpApplicantParamMap);
+        String listWithAppointmentsId = httpRequestExecutor.getListObjectsIdByPrams(Appointment.class, httpApplicantParamMap);
 
-        for (String id : listWithAppointmentsId){
-            listForReturn.add(getInterviewByAppointmentID(id));
-        }
+            listForReturn.add(getInterviewByAppointmentID(listWithAppointmentsId));
+
         return listForReturn;
     }
 

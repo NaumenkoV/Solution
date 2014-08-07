@@ -4,12 +4,10 @@ import com.softserveinc.ita.dao.ApplicantDAO;
 import com.softserveinc.ita.entity.Applicant;
 import com.softserveinc.ita.entity.ApplicantBenchmark;
 import com.softserveinc.ita.entity.Group;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
 public class ApplicantDAOMockImpl implements ApplicantDAO {
     private Map<String, Group> db;
     private Map<String, ApplicantBenchmark> applicantsInAGroup;

@@ -1,39 +1,47 @@
+//on document ready
 $(function () {
     loadGroupCapacity();
     loadApplicantsIDListByStatus('PASSED');
     loadApplicantsIDListByStatus('NOT_PASSED');
     loadApplicantsByStatus('PASSED');
     loadApplicantsByStatus('NOT_PASSED');
+    //if no applicants in group
     if (applicants.length == 0) {
-        $('scheduleView').toggle();
-        $('nocontent').toggle();
+        //disable irrelevant buttons
+        $('.scheduleView').button({disabled: true});
+        //say sorry, no content
+        $('.nocontent').toggle();
     } else {
+        //load interview result for each applicant
         applicants.forEach(function (element) {
             loadInterviewResult(element)
         });
-//interviewed
+        //render applicants with interviews
         var interviewedRendered = Mustache.render(pageTemplate, {'data': applicants, 'rank': true});
         var interviewedAccordion = $('.interviewed');
         interviewedAccordion.html(interviewedRendered);
-
-        $(".interviewed").sortable({"axis": "y", items: ".container", handle: ".accordion-section",
+        //make accordion sortable
+        $(".interviewed").sortable({"axis": "y", items: ".applicantContainer", handle: ".accordion-section",
             create: function (event) {
+                //'on create': sort items
                 sort($(event.target).children()[0], applicants, true);
             }, stop: function (event, ui) {
+                //'on stop':highlight top items
                 highlight(ui.item);
             }
         });
-        postRender();
     }
+    //init accordion, set event listeners
+    postRender();
 });
 loadInterviewResult = function (element) {
     $.ajax({
         async: false,
-        url: location.origin + '/interviews/' + element.appointmentID + '/result',
+        url: '/interviews/' + element.appointmentID,
         dataType: 'json',
         type: 'GET',
         success: function (interview) {
-            element['interview'] = interview;
+            element['interview'] = calculateInterviewResult(interview);
         },
         error: function () {
             $("#dialog").data('content', "Failed to load result of the interview by id:" + element.appointmentID);
@@ -41,8 +49,22 @@ loadInterviewResult = function (element) {
         }
     });
 };
+//take interview object received from server, return total points and final comment of interview
+calculateInterviewResult = function (interview) {
+    var result = {};
+    var totalPoints = 0;
+    result['finalComment'] = interview['finalComment'];
+    $(interview['questions']).each(function (index, value) {
+        //total points = sum(each question mark * each question weight)
+        totalPoints += +value['mark'] * +value['weight'];
+    });
+    result['totalPoints'] = totalPoints;
+    return result;
+};
+//highlight accordion items with an appropriate style
 highlight = function (item) {
-    var siblings = $(item).siblings("div.container").addBack();
+    //siblings and self
+    var siblings = $(item).siblings("div.applicantContainer").addBack();
     $(siblings).each(function (index, value) {
         if (index < groupCapacity) {
             $(value).children("h3").addClass("ui-state-highlight");

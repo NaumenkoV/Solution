@@ -10,6 +10,7 @@ import com.softserveinc.ita.entity.Group;
 import com.softserveinc.ita.exception.impl.GroupDoesntExistException;
 import com.softserveinc.ita.exception.impl.GroupWithThisNameIsAlreadyExists;
 import com.softserveinc.ita.service.GroupService;
+import org.hibernate.JDBCException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -75,7 +76,7 @@ public class GroupServiceImpl implements GroupService {
             Course course = courseDAO.getCourseByName(group.getCourse().getName());
             group.setCourse(course);
             return groupDAO.addGroup(group);
-        } catch (Exception e) {
+        } catch (JDBCException e) {
             throw new GroupWithThisNameIsAlreadyExists();
         }
     }
@@ -108,14 +109,18 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
-    public Group updateGroup(Group group) throws GroupWithThisNameIsAlreadyExists {
+    public Group updateGroup(Group group) throws GroupWithThisNameIsAlreadyExists, GroupDoesntExistException {
         try {
             Course course = courseDAO.getCourseByName(group.getCourse().getName());
             group.setCourse(course);
             Group updatedGroup = groupDAO.updateGroup(group);
             return updatedGroup;
-        } catch (Exception e) {
+        }
+        catch(JDBCException e){
             throw new GroupWithThisNameIsAlreadyExists();
+        }
+        catch (Exception e) {
+            throw new GroupDoesntExistException();
         }
     }
 

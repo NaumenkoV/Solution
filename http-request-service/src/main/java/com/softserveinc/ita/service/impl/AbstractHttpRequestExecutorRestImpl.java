@@ -37,7 +37,7 @@ public abstract class AbstractHttpRequestExecutorRestImpl implements HttpRequest
     }
 
     @Override
-    public List<String> getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException {
+    public String getListObjectsIdByPrams(Class objectClass, Map<Class, String> urlValues) throws HttpRequestException {
 
         // name subdirectory
         String subclass = objectClass.getSimpleName().toLowerCase();
@@ -53,7 +53,7 @@ public abstract class AbstractHttpRequestExecutorRestImpl implements HttpRequest
 
                   while(setItertor.hasNext()){
                       Class clazz = setItertor.next();
-                      String userId = urlValues.get(clazz);
+
 
                       urlPath.append(clazz.getSimpleName().toLowerCase()).append("=").append(urlValues.get(clazz));
 
@@ -63,7 +63,7 @@ public abstract class AbstractHttpRequestExecutorRestImpl implements HttpRequest
 
 
 
-        return getObject(urlPath.toString(), List.class);
+        return getObject(urlPath.toString(), String.class);
 
 
     }

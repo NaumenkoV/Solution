@@ -24,7 +24,7 @@ public interface GroupService {
 
     void removeGroup(String groupId) throws GroupDoesntExistException;
 
-    Group updateGroup(Group group) throws GroupWithThisNameIsAlreadyExists;
+    Group updateGroup(Group group) throws GroupWithThisNameIsAlreadyExists, GroupDoesntExistException;
     
     int getGroupCapacity(String groupID);
 

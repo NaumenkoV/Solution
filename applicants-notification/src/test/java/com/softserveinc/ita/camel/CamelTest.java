@@ -2,6 +2,7 @@ package com.softserveinc.ita.camel;
 
 import com.softserveinc.ita.entity.NotificationJSONInfo;
 import com.softserveinc.ita.service.QueueManager;
+import com.softserveinc.ita.utils.JsonUtil;
 import org.apache.camel.BeanInject;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.NotifyBuilder;
@@ -10,6 +11,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,6 +28,9 @@ public class CamelTest extends CamelSpringTestSupport {
 
     @BeanInject("queueManager")
     private QueueManager queueManager;
+
+    @BeanInject("jsonUtil")
+    private JsonUtil jsonUtil;
 
     @EndpointInject(uri = consumerMockUri)
     private MockEndpoint consumerMock;
@@ -82,12 +87,16 @@ public class CamelTest extends CamelSpringTestSupport {
         consumerMock.assertIsSatisfied();
     }
 
-//    @Test
-//    public void testServiceProducesCorrectMessageBodies() throws Exception {
-//        consumerMock.expectedBodiesReceivedInAnyOrder(messageList);
-//        queueManager.notifyApplicants(messageList);
-//        boolean matches = notify.matches(5, TimeUnit.SECONDS);
-//        assertTrue(matches);
-//        consumerMock.assertIsSatisfied();
-//    }
+    @Test
+    public void testServiceProducesCorrectMessageBodies() throws Exception {
+        ArrayList<String> jsonMessages = new ArrayList<>();
+        for (NotificationJSONInfo info : messageList){
+           jsonMessages.add(jsonUtil.toJson(info));
+        }
+        consumerMock.expectedBodiesReceivedInAnyOrder(jsonMessages);
+        queueManager.notifyApplicants(messageList);
+        boolean matches = notify.matches(5, TimeUnit.SECONDS);
+        assertTrue(matches);
+        consumerMock.assertIsSatisfied();
+    }
 }

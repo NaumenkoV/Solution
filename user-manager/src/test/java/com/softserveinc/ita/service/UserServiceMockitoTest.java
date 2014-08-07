@@ -37,13 +37,4 @@ public class UserServiceMockitoTest extends BaseServiceTest {
         verify(userDao, times(1)).deleteUserById(muserID);
         assertEquals(muserID, result);
     }
-
-//    @Test(expected = UserDoesNotExistException.class)
-//    public void testDeleteUserAndExpectedIsException() throws UserDoesNotExistException { /TODO: test how hibernate will throw exception
-//        String muserID = "124";
-//
-//        doThrow(new UserDoesNotExistException()).when(userDao).deleteUserById(muserID);
-//        userService.deleteUser(muserID);
-//        verify(userDao, times(1)).deleteUserById(muserID);
-//    }
 }
