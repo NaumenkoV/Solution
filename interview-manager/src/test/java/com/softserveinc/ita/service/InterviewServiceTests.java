@@ -47,11 +47,11 @@ public class InterviewServiceTests extends BaseServiceTests {
     public void testPutInterviewAndExpectOk() throws HttpRequestException, WrongCriteriaException {
         Interview interviewActual1 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITHOUT_QUESTIONS).create("1");
         Interview interviewActual2 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_STANDARD_QUESTIONS).create("2");
-        Interview interviewActual3 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS).create("3");
+        Interview interviewActual3 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_QUESTIONS).create("3");
 
         String interviewExpected1 = interviewService.putInterview(interviewActual1.getInterviewId(), InterviewType.INTERVIEW_WITHOUT_QUESTIONS);
         String interviewExpected2 = interviewService.putInterview(interviewActual2.getInterviewId(), InterviewType.INTERVIEW_WITH_STANDARD_QUESTIONS);
-        String interviewExpected3 = interviewService.putInterview(interviewActual3.getInterviewId(), InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS);
+        String interviewExpected3 = interviewService.putInterview(interviewActual3.getInterviewId(), InterviewType.INTERVIEW_WITH_USER_QUESTIONS);
 
         assertEquals(interviewActual1.getInterviewId(), interviewExpected1);
         assertEquals(interviewActual2.getInterviewId(), interviewExpected2);

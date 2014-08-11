@@ -53,7 +53,7 @@ public class OrmConfig {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/INTERVIEW");
         dataSource.setUsername("root");
-        dataSource.setPassword("A1k40jna");
+        dataSource.setPassword("1111");
 
         return dataSource;
     }

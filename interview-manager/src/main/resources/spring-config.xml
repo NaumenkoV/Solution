@@ -17,16 +17,10 @@
     <context:annotation-config/>
 
     <!-- For bean-components (@Component, @Service)  -->
-    <context:component-scan base-package="com.softserveinc.ita.interviewfactory.dao"/>
+
     <context:component-scan base-package="com.softserveinc.ita.interviewfactory.service"/>
-
+    <context:component-scan base-package="com.softserveinc.ita.config"/>
     <context:component-scan base-package="com.softserveinc.ita.utils"/>
-
-
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
 
     <bean id="httpRequestExecutor" class="com.softserveinc.ita.service.impl.HttpRequestExecutorRestImpl" >
         <constructor-arg name="baseUrl" value="http://localhost:8080"/>
@@ -40,5 +34,7 @@
     <bean id="interviewFactory" class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
         <property name="serviceLocatorInterface" value="com.softserveinc.ita.interviewfactory.factory.InterviewFactory" />
     </bean>
+
+    <import resource="dao-context.xml"/>
 
 </beans>

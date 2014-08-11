@@ -10,13 +10,12 @@ import exceptions.WrongCriteriaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
 @Service
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class InterviewServiceImpl implements InterviewService {
 
     @Autowired
@@ -29,6 +28,7 @@ public class InterviewServiceImpl implements InterviewService {
     HttpRequestExecutor httpRequestExecutor;
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<Interview> getInterviewByApplicantID(String applicantId) throws HttpRequestException, WrongCriteriaException {
         List<Interview> listForReturn = new ArrayList<>();
         Map<Class, String> httpApplicantParamMap = new HashMap<>();
@@ -41,6 +41,7 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public String putInterview(String appointmentID, InterviewType type) throws HttpRequestException, WrongCriteriaException {
 
         if (type == null) throw new WrongCriteriaException("Type is wrong");
@@ -57,9 +58,9 @@ public class InterviewServiceImpl implements InterviewService {
             return interviewDAO.putInterview(interview);
         }
         else
-        if (type.equals(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS)) {
+        if (type.equals(InterviewType.INTERVIEW_WITH_USER_QUESTIONS)) {
             Interview interview =
-                    interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS).create(appointmentID);
+                    interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_QUESTIONS).create(appointmentID);
             return interviewDAO.putInterview(interview);
         }
         else
@@ -67,31 +68,37 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
+
     public Interview getInterviewByAppointmentID(String appointmentId) throws WrongCriteriaException, HttpRequestException {
+
         Interview interview = interviewDAO.getInterviewByAppointmentId(appointmentId);
         if (interview == null){
-            String interviewId = putInterview(appointmentId, InterviewType.INTERVIEW_WITHOUT_QUESTIONS);
+            String interviewId = putInterview(appointmentId, InterviewType.INTERVIEW_WITH_USER_QUESTIONS);
             interview = interviewDAO.getInterviewByAppointmentId(interviewId);
         }
         return interview;
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public void removeInterviewByAppointmentId(String interviewId) throws HttpRequestException {
         interviewDAO.removeInterviewByAppointmentId(interviewId);
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public void updateInterview(Interview interview) throws HttpRequestException {
         interviewDAO.updateInterview(interview);
     }
 
     @Override
+   // @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<String> getAllInterviewsId() throws HttpRequestException {
         return interviewDAO.getAllInterviewsId();
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<Interview> getAllInterviews() throws HttpRequestException {
         List<String> allInterviewIdList = getAllInterviewsId();
         List<Interview> allInterviewsList = new ArrayList<>();
@@ -102,6 +109,7 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public InterviewResults getInterviewResultsByInterviewId(String InterviewId) throws WrongCriteriaException, HttpRequestException {
         InterviewResults interviewResults = new InterviewResults();
         String finalComment = "";

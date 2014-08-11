@@ -25,6 +25,9 @@ public class QuestionsBlock implements Serializable {
     @Column(name = "UserId")
     String userId;
 
+    @Column(name = "User_role")
+    String userRole;
+
     @Column(name = "InterviewId")
     String interviewId = "";
 
@@ -96,6 +99,14 @@ public class QuestionsBlock implements Serializable {
         this.bonusPoints = bonusPoints;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,8 +118,9 @@ public class QuestionsBlock implements Serializable {
         if (Id != null ? !Id.equals(that.Id) : that.Id != null) return false;
         if (finalComment != null ? !finalComment.equals(that.finalComment) : that.finalComment != null) return false;
         if (interviewId != null ? !interviewId.equals(that.interviewId) : that.interviewId != null) return false;
-
+        if (questions != null ? !questions.equals(that.questions) : that.questions != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (userRole != null ? !userRole.equals(that.userRole) : that.userRole != null) return false;
 
         return true;
     }
@@ -117,7 +129,9 @@ public class QuestionsBlock implements Serializable {
     public int hashCode() {
         int result = Id != null ? Id.hashCode() : 0;
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
         result = 31 * result + (interviewId != null ? interviewId.hashCode() : 0);
+        result = 31 * result + (questions != null ? questions.hashCode() : 0);
         result = 31 * result + (finalComment != null ? finalComment.hashCode() : 0);
         result = 31 * result + bonusPoints;
         return result;
@@ -128,6 +142,7 @@ public class QuestionsBlock implements Serializable {
         return "QuestionsBlock{" +
                 "Id='" + Id + '\'' +
                 ", userId='" + userId + '\'' +
+                ", userRole='" + userRole + '\'' +
                 ", interviewId='" + interviewId + '\'' +
                 ", questions=" + questions +
                 ", finalComment='" + finalComment + '\'' +

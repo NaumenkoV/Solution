@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional(isolation = Isolation.READ_COMMITTED)
 public class QuestionsBlockServicesImpl implements QuestionsBlockServices {
 
     @Autowired
@@ -44,17 +45,20 @@ public class QuestionsBlockServicesImpl implements QuestionsBlockServices {
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public QuestionsBlock getQuestionsBlockFromInterviewByUserId(String userID, String appointmentId) throws WrongCriteriaException, HttpRequestException {
         interviewService.getInterviewByAppointmentID(appointmentId);
           return questionsBlockDAO.getQuestionsBlockByInterviewIdAndUserId(userID, appointmentId);
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public QuestionsBlock getQuestionsBlockByQuestionsBlockId(String questionsBlockId) {
         return questionsBlockDAO.getQuestionsBlockFromInterviewByQuestionsBlockId(questionsBlockId);
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public void addQuestionsBlock(QuestionsBlock questionsBlock) throws WrongCriteriaException, HttpRequestException {
         String interviewId = questionsBlock.getInterviewId();
         Interview interview = interviewService.getInterviewByAppointmentID(interviewId);
@@ -63,17 +67,20 @@ public class QuestionsBlockServicesImpl implements QuestionsBlockServices {
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public String getQuestionsBlockIdByQuestionsBlockBody(QuestionsBlock questionsBlock, String userId)  {
         return questionsBlockDAO.getQuestionsBlockByInterviewIdAndUserId(userId, questionsBlock.getInterviewId()).getId();
     }
 
         @Override
+ //       @Transactional(isolation = Isolation.READ_COMMITTED)
     public String updateQuestionsBlock(QuestionsBlock newQuestionsBlock, String userId) {
         newQuestionsBlock.setUserId(userId);
         return questionsBlockDAO.updateQuestionsBlock(newQuestionsBlock);
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public void updateFinalCommentInQuestionsBlock(FinalComment finalComment, String userId) throws WrongCriteriaException, HttpRequestException {
         QuestionsBlock questionsBlock = getQuestionsBlockFromInterviewByUserId(userId, finalComment.getInterviewId());
         questionsBlock.setFinalComment(finalComment.getFinalComment());
@@ -82,11 +89,13 @@ public class QuestionsBlockServicesImpl implements QuestionsBlockServices {
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public void deleteQuestionsBlockById(String questionsBlockId) {
         questionsBlockDAO.deleteQuestionsBlockById(questionsBlockId);
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public QuestionsBlock getStandardQuestionsBlockFromInterview(String interviewId) throws WrongCriteriaException, HttpRequestException {
         Set<QuestionsBlock> questionsBlocks = interviewService.getInterviewByAppointmentID(interviewId).getQuestionsBlocks();
 
@@ -98,11 +107,13 @@ public class QuestionsBlockServicesImpl implements QuestionsBlockServices {
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public QuestionsBlock getStandardQuestionsBlock() {
         return standardQuestionsBlock;
     }
 
     @Override
+ //   @Transactional(isolation = Isolation.READ_COMMITTED)
     public void setStandardQuestionsBlock(QuestionsBlock standardQuestionsBlock) {
         this.standardQuestionsBlock = standardQuestionsBlock;
     }

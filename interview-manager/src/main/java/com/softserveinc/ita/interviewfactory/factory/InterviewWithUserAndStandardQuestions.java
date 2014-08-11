@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 
-@Component("INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS")
+@Component("INTERVIEW_WITH_USER_QUESTIONS")
 public class InterviewWithUserAndStandardQuestions implements CreateInterviewStrategy {
 
     @Autowired
@@ -31,24 +30,14 @@ public class InterviewWithUserAndStandardQuestions implements CreateInterviewStr
         Interview interview = new Interview(interviewId);
         Set<QuestionsBlock> allQuestionsBlocks = new HashSet<>();
 
-        QuestionsBlock standardQuestionsBlock = questionsBlockServices.getStandardQuestionsBlock();
-        standardQuestionsBlock.setInterviewId(interviewId);
-
-        Set<QuestionInformation> questionInformationSet2 = standardQuestionsBlock.getQuestions();
-        Iterator<QuestionInformation> it = questionInformationSet2.iterator();
-        while(it.hasNext()){
-            it.next().setInterviewId(interviewId);
-        }
-        standardQuestionsBlock.setQuestions(questionInformationSet2);
-
-        allQuestionsBlocks.add(standardQuestionsBlock);
-
         Appointment appointment = httpRequestExecutor.getObjectByID(interviewId, Appointment.class);
         List<String> Users = appointment.getUserIdList();
 
         for (int i = 0; i < Users.size(); i++){
             User user = httpRequestExecutor.getObjectByID(Users.get(i), User.class);
             QuestionsBlock userQuestionsBlock = new QuestionsBlock(Users.get(i));
+            String role = user.getRole().getName();
+            userQuestionsBlock.setUserRole(role);
             userQuestionsBlock.setInterviewId(interviewId);
             Set<QuestionInformation> userQuestionInformationList = new HashSet<>();
             List<Question> Questions = user.getQuestions();
@@ -64,7 +53,7 @@ public class InterviewWithUserAndStandardQuestions implements CreateInterviewStr
             allQuestionsBlocks.add(userQuestionsBlock);
         }
         interview.setQuestionsBlocks(allQuestionsBlocks);
-        interview.setType(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS);
+        interview.setType(InterviewType.INTERVIEW_WITH_USER_QUESTIONS);
         interview.setInterviewId(appointment.getAppointmentId());
         return interview;
     }

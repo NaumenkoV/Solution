@@ -8,7 +8,6 @@ import exceptions.WrongCriteriaException;
 import org.json.JSONException;
 import org.json.simple.parser.JSONParser;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
@@ -77,23 +76,24 @@ public class FactoryInterviewTests extends BaseFactoryInterviewTests {
 
     @Test
     public void testCreateInterviewWithUserAndStandardQuestions() throws HttpRequestException, IOException, org.json.simple.parser.ParseException, JSONException {
-        Interview interview1 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS).create("1");
-        Interview interview2 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_AND_STANDARD_QUESTIONS).create("2");
-        BufferedReader reader1 = new BufferedReader(new InputStreamReader(
-                getClass().getResourceAsStream(
-                        "/JsonTestInterviewWithUserAndStandardQuestions1.json")));
-        Object object1 = parser.parse(reader1);
-        String json1 = object1.toString();
-        //TODO: Fix assert.
-      //  JSONAssert.assertEquals(interviewUtilJson.toJson(interview1), json1, false);
-
-        BufferedReader reader2 = new BufferedReader(new InputStreamReader(
-                getClass().getResourceAsStream(
-                        "/JsonTestInterviewWithUserAndStandardQuestions2.json")));
-        Object object2 = parser.parse(reader2);
-        String json2 = object2.toString();
-
-        //TODO: Fix assert.
-       // JSONAssert.assertEquals(interviewUtilJson.toJson(interview2), json2, false);
+        Interview interview1 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_QUESTIONS).create("3");
+        Interview interview2 = interviewFactory.getInterviewWithType(InterviewType.INTERVIEW_WITH_USER_QUESTIONS).create("2");
+        System.out.println(interviewUtilJson.toJson(interview1));
+//        BufferedReader reader1 = new BufferedReader(new InputStreamReader(
+//                getClass().getResourceAsStream(
+//                        "/JsonTestInterviewWithUserAndStandardQuestions1.json")));
+//        Object object1 = parser.parse(reader1);
+//        String json1 = object1.toString();
+//        //TODO: Fix assert.
+//      //  JSONAssert.assertEquals(interviewUtilJson.toJson(interview1), json1, false);
+//
+//        BufferedReader reader2 = new BufferedReader(new InputStreamReader(
+//                getClass().getResourceAsStream(
+//                        "/JsonTestInterviewWithUserAndStandardQuestions2.json")));
+//        Object object2 = parser.parse(reader2);
+//        String json2 = object2.toString();
+//
+//        //TODO: Fix assert.
+//       // JSONAssert.assertEquals(interviewUtilJson.toJson(interview2), json2, false);
     }
 }

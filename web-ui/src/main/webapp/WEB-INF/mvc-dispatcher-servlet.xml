@@ -21,6 +21,7 @@
     <mvc:resources location="/WEB-INF/login/" mapping="/login/**"/>
     <mvc:resources location="/WEB-INF/errors/" mapping="/errors/**"/>
     <mvc:resources location="/WEB-INF/interview/" mapping="/ui/interview/**"/>
+    <mvc:resources location="/WEB-INF/interview_results/" mapping="/ui/interview_results/**"/>
     <mvc:resources location="/WEB-INF/applicants/" mapping="/ui/group/**"/>
     <mvc:resources location="/WEB-INF/groups/" mapping="/ui/groups/**"/>
     <mvc:resources location="/WEB-INF/user/" mapping="/ui/user/**"/>

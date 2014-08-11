@@ -39,7 +39,7 @@ public class OtherPagesController {
     }
 
     @RequestMapping(value = "/interview_results", method = RequestMethod.GET)
-    public String showInterviewResults() {
+    public String showInterviewResults(@RequestParam String interviewId) {
         return "interview_results/pages/index";
     }
 }

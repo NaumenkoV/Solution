@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.Set;
-
+@Transactional(isolation = Isolation.READ_COMMITTED)
 @Service
 public class QuestionsInformationServiceImpl implements QuestionsInformationServices {
 
@@ -37,6 +37,7 @@ public class QuestionsInformationServiceImpl implements QuestionsInformationServ
 
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public void addQuestionInformation(QuestionInformation questionInformation, String userId) throws WrongCriteriaException, HttpRequestException {
         String interviewId = questionInformation.getInterviewId();
         Interview interview = interviewService.getInterviewByAppointmentID(interviewId); //если интервью не существует, тут оно будет создано
@@ -62,6 +63,7 @@ public class QuestionsInformationServiceImpl implements QuestionsInformationServ
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public String getQuestionInformationIdByQuestionInformationBody(QuestionInformation questionInformation, String userId) throws WrongCriteriaException, HttpRequestException {
 
         QuestionsBlock questionsBlock = questionsBlockService.getQuestionsBlockFromInterviewByUserId(userId, questionInformation.getInterviewId());
@@ -79,11 +81,13 @@ public class QuestionsInformationServiceImpl implements QuestionsInformationServ
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public String updateQuestionInformation(QuestionInformation questionInformation) {
         return questionInformationDAO.updateQuestionInformation(questionInformation);
     }
 
     @Override
+  //  @Transactional(isolation = Isolation.READ_COMMITTED)
     public void deleteQuestionInformationById(String questionInformationId) {
         questionInformationDAO.deleteQuestionInformationById(questionInformationId);
     }
